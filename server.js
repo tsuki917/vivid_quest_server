@@ -41,7 +41,7 @@ let server = app.listen(3000, () => {
 /* 3. 以後、アプリケーション固有の処理 */
 app.use(
   cors({
-    origin: "http://localhost:5501", //アクセス許可するオリジン
+    origin: "http://localhost:5000", //アクセス許可するオリジン
     credentials: true, //レスポンスヘッダーにAccess-Control-Allow-Credentials追加
     optionsSuccessStatus: 200, //レスポンスstatusを200に設定
   })

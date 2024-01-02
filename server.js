@@ -17,7 +17,7 @@ import {
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBWKayvMv_c8q02tLFQYX6xsW5L5tKKqyA",
+  apiKey: process.env.APIKEY,
   authDomain: "scrole-p5.firebaseapp.com",
   projectId: "scrole-p5",
   storageBucket: "scrole-p5.appspot.com",

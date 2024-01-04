@@ -8,7 +8,6 @@ import {
   uploadString,
   getStorage,
   listAll,
-  getMetadata,
   getDownloadURL,
 } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -48,16 +47,16 @@ app.use(
 );
 app.use(bodyParser.json());
 const storage = getStorage();
-app.post("/", (req, res, next) => {
-  const storageRef = ref(storage, "1-1/" + uuidv4() + ".png");
+app.post("/:stage", (req, res, next) => {
+  const storageRef = ref(storage, req.params.stage + "/" + uuidv4() + ".png");
   const base_content = req.body.base.split(",")[1];
   console.log(base_content);
   uploadString(storageRef, base_content, "base64").then((snapshot) => {
     console.log("Uploaded a base64 string!");
   });
 });
-app.get("/", (req, res, next) => {
-  const listref = ref(storage, "1-1/");
+app.get("/:stage", (req, res, next) => {
+  const listref = ref(storage, req.params.stage + "/");
   listAll(listref).then((res_list) => {
     let image_count = 0;
     const url_list = [];
@@ -67,8 +66,7 @@ app.get("/", (req, res, next) => {
       getDownloadURL(imageref).then((url) => {
         image_count++;
         url_list.push(url);
-        if (image_count === res_list.items.length) {
-          console.log(url_list);
+        if (image_count === res_list.items.length || image_count == 10) {
           res.json({ urls: url_list });
         }
       });

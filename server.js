@@ -50,9 +50,7 @@ const storage = getStorage();
 app.post("/:stage", (req, res, next) => {
   const storageRef = ref(storage, req.params.stage + "/" + uuidv4() + ".png");
   const base_content = req.body.base.split(",")[1];
-  console.log(base_content);
   uploadString(storageRef, base_content, "base64").then((snapshot) => {
-    console.log("Uploaded a base64 string!");
   });
 });
 app.get("/:stage_path", (req, res, next) => {

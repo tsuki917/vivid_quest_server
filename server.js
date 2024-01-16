@@ -55,8 +55,8 @@ app.post("/:stage", (req, res, next) => {
     console.log("Uploaded a base64 string!");
   });
 });
-app.get("/:stage", (req, res, next) => {
-  const listref = ref(storage, req.params.stage + "/");
+app.get("/:stage_path", (req, res, next) => {
+  const listref = ref(storage, req.params.stage_path + "/");
   listAll(listref).then((res_list) => {
     let image_count = 0;
     const url_list = [];
